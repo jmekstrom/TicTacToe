@@ -180,6 +180,7 @@ function lgWaffle() {
         '</div>' +
         '</div>');
 }
+<<<<<<< HEAD
 
 function XO(n) {
     console.log("Slot:", n, "has been clicked");
@@ -231,5 +232,24 @@ function Build_Win_Array(width){
     Win_Array.push(Win_Condition);
     console.log("Win Array", Win_Array);
     Win_Condition = [];
+
+
+var ticSize = 4;
+function smGenerator() {
+    for (k = 0; k < 1; k++) {
+        $('.container').append('<div class="smWaffleGrid"></div>');
+        for (j = 0; j < 3*ticSize; j += 3) {
+            $('.smWaffleGrid').append('<div class="row"></div');
+            for (i = 0; i < ticSize; i++) {
+                //var num = j*ticSize + i;
+                var num = j + i;
+                $('.row').append(
+                    '<div class="slot" onclick=XO(' + num + ')></div>');
+                console.log('num: ' + num + " i: " + i);
+            }
+            console.log('j' + j);
+        }
+        console.log('k:' + k);
+    }
 
 }
