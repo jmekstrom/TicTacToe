@@ -13,6 +13,9 @@
     margin: 5px;
     display: inline-block;
     background-color: rgb(211, 150, 90);
+    font-size: 100px;
+    text-align: center;
+    line-height: 125px;
 }
 
 #gameboard {
