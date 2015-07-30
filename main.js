@@ -193,11 +193,11 @@ function XO(n) {
     if (player == 1) {
         player_clicks[n - 1] = "x";
         player = 2;
-        $("#slot" + n).text("X");
+        $("#slot" + n).text("X").addClass('.exes');
     } else {
         player_clicks[n - 1] = "o";
         player = 1;
-        $("#slot" + n).text("O");
+        $("#slot" + n).text("O").addClass('.ohs');
     }
     console.log(player_clicks)
     win_check();
@@ -279,7 +279,6 @@ function Build_Win_Array(width) {
     Win_Condition = [];
 }
 
-}
 var container = $('<div>', {
     class: 'container',
 });
@@ -295,13 +294,14 @@ var cell = $('<div>', {
     onclick: 'XO(' + num + ')',
 });
 var num = 0;
+
 function smGenerator() {
     for (k = 0; k < 1; k++) {
         $('#gameboard').append(smWaffleGrid);
-        for (j = 0; j < 3; j ++) {
+        for (j = 0; j < 3; j++) {
             $('.smWaffleGrid').append(row);
             for (i = 0; i < 3; i++) {
-            	num = num++;
+                num = num++;
                 $('.row').append(cell);
                 console.log('num: ' + num + " i: " + i);
             }
@@ -311,25 +311,3 @@ function smGenerator() {
     }
 
 }
-
-function gameBoardGenerate() {
-    for (i = 0; i < 1; i) {
-
-
-
-        var gameTile = '<div>',
-            {
-                id: 'tile' + i,
-                class: 'board',
-            }
-        $('#container').append(gameTile)
-    }
-}
-var x = 0;
-for (j = 0;)
-    for (i = 0; i < 1; i++) {
-        x++; < div class = "slot"
-        onclick = XO('x')
-
-    }
-*/
