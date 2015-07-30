@@ -13,8 +13,20 @@
     margin: 5px;
     display: inline-block;
     background-color: rgb(211, 150, 90);
+    line-height:125px;
+    text-align:center;
+    font-size:100px;
 }
 
 #gameboard {
 	margin:0 auto;
+}
+
+.exes {
+    background-image:url('https://img.4plebs.org/boards/x/image/1431/06/1431064341362.png');
+    background-size:cover;
+}
+.ohs {
+    background-image:url('http://etc.usf.edu/presentations/extras/letters/fridge_magnets/red/25/o-300.png');
+    background-size:cover;
 }

@@ -180,14 +180,29 @@ function lgWaffle() {
         '</div>' +
         '</div>');
 }
-<<<<<<< HEAD
+var player = 1;
 
 function XO(n) {
     console.log("Slot:", n, "has been clicked");
-    Build_Win_Array(n);
-}
+    $('#slot' + n).css('background-color', 'green');
+    if (player == 1) {
+        $('#slot' + n).addClass('exes');
+        player = 2;
+    } else {
+        $('#slot' + n).addClass('ohs');
+        player = 1;
 
-function Build_Win_Array(width){
+    }
+    //Build_Win_Array(n);
+}
+$(document).ready(function() {
+    //switch to determine input into array
+    $(".slot").click(function() {
+        console.log('slot was clicked')
+    })
+});
+
+function Build_Win_Array(width) {
 
     var size = width;
     var Win_Condition = [];
@@ -232,13 +247,16 @@ function Build_Win_Array(width){
     Win_Array.push(Win_Condition);
     console.log("Win Array", Win_Array);
     Win_Condition = [];
+}
 
 
-var ticSize = 4;
+
+/*var ticSize = 4;
+
 function smGenerator() {
     for (k = 0; k < 1; k++) {
         $('.container').append('<div class="smWaffleGrid"></div>');
-        for (j = 0; j < 3*ticSize; j += 3) {
+        for (j = 0; j < 3 * ticSize; j += 3) {
             $('.smWaffleGrid').append('<div class="row"></div');
             for (i = 0; i < ticSize; i++) {
                 //var num = j*ticSize + i;
@@ -253,3 +271,25 @@ function smGenerator() {
     }
 
 }
+
+function gameBoardGenerate() {
+    for (i = 0; i < 1; i) {
+
+
+
+        var gameTile = '<div>',
+            {
+                id: 'tile' + i,
+                class: 'board',
+            }
+        $('#container').append(gameTile)
+    }
+}
+var x = 0;
+for (j = 0;)
+    for (i = 0; i < 1; i++) {
+        x++; < div class = "slot"
+        onclick = XO('x')
+
+    }
+*/
