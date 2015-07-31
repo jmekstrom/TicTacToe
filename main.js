@@ -4,27 +4,26 @@ var Win_Array = [];
 var board_width;
 var click_num = 0;
 
-function smWaffle() {
-    $('#gameboard').html(
-        '<div class="container">' +
-        '<div class="smWaffleGrid">' +
-        '<div class="row">' +
-        '<div class="slot" id="slot1" onclick=XO(1)></div>' +
-        '<div class="slot" id="slot2" onclick=XO(2)></div>' +
-        '<div class="slot" id="slot3" onclick=XO(3)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" id="slot4" onclick=XO(4)></div>' +
-        '<div class="slot" id="slot5" onclick=XO(5)></div>' +
-        '<div class="slot" id="slot6" onclick=XO(6)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" id="slot7" onclick=XO(7)></div>' +
-        '<div class="slot" id="slot8" onclick=XO(8)></div>' +
-        '<div class="slot" id="slot9" onclick=XO(9)></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>');
+function smWaffle(size) {
+    var container = $("<div>", {
+        class: container
+    })
+    $("#gameboard").append(container);
+    for(var j = 1; j <= size; j++) {
+        //create row object
+        var row = $("<div>",{
+            class: "row"+j,
+        })
+        $(".container").append(row);
+        for (var i = 1; i < size + i; i++) {
+            var slot = $("<div>", {
+                class: "slot",
+                id: "slot" + i,
+                onclick: "XO(" + i + ")"
+            })
+            $(".row" + j).append(slot);
+        }
+    }
 }
 
 function mdWaffle() {
@@ -282,23 +281,6 @@ function Build_Win_Array(width) {
     Win_Condition = [];
 
 }
-var ticSize = 4;
 
-function smGenerator() {
-    for (k = 0; k < 1; k++) {
-        $('.container').append('<div class="smWaffleGrid"></div>');
-        for (j = 0; j < 3 * ticSize; j += 3) {
-            $('.smWaffleGrid').append('<div class="row"></div');
-            for (i = 0; i < ticSize; i++) {
-                var num = j * ticSize + i;
-                var num = j + i;
-                $('.row').append(
-                    '<div class="slot" onclick=XO(' + num + ')></div>');
-                console.log('num: ' + num + " i: " + i);
-            }
-            console.log('j' + j);
-        }
-        console.log('k:' + k);
-    }
 
-}
+
