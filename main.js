@@ -4,27 +4,26 @@ var Win_Array = [];
 var board_width;
 var click_num = 0;
 
-function smWaffle() {
-    $('#gameboard').html(
-        '<div class="container">' +
-        '<div class="smWaffleGrid">' +
-        '<div class="row">' +
-        '<div class="slot" id="slot1" onclick=XO(1)></div>' +
-        '<div class="slot" id="slot2" onclick=XO(2)></div>' +
-        '<div class="slot" id="slot3" onclick=XO(3)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" id="slot4" onclick=XO(4)></div>' +
-        '<div class="slot" id="slot5" onclick=XO(5)></div>' +
-        '<div class="slot" id="slot6" onclick=XO(6)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" id="slot7" onclick=XO(7)></div>' +
-        '<div class="slot" id="slot8" onclick=XO(8)></div>' +
-        '<div class="slot" id="slot9" onclick=XO(9)></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>');
+function smWaffle(size) {
+    var container = $("<div>", {
+        class: container
+    })
+    $("#gameboard").append(container);
+    for(var j = 1; j <= size; j++) {
+        //create row object
+        var row = $("<div>",{
+            class: "row"+j,
+        })
+        $(".container").append(row);
+        for (var i = 1; i < size + i; i++) {
+            var slot = $("<div>", {
+                class: "slot",
+                id: "slot" + i,
+                onclick: "XO(" + i + ")"
+            })
+            $(".row" + j).append(slot);
+        }
+    }
 }
 
 function mdWaffle() {
@@ -187,17 +186,16 @@ function lgWaffle() {
         '</div>');
 }
 
-
 function XO(n) {
     click_num++;
     console.log("Slot:", n, "has been clicked");
     $("#slot" + n).removeAttr('onclick');
     if (player == 1) {
-        player_clicks[n - 1] = "x";
+        player_clicks[n-1] = "x";
         player = 2;
         $("#slot" + n).append("<img class='tile_img' src='images/blueberry.png'>");
     } else {
-        player_clicks[n - 1] = "o";
+        player_clicks[n-1] = "o";
         player = 1;
         $("#slot" + n).append("<img class='tile_img' src='images/raspberry.png'>");
     }
@@ -210,12 +208,6 @@ function XO(n) {
         console.log("Tie Game")
     }
 }
-$(document).ready(function() {
-    //switch to determine input into array
-    $(".slot").click(function() {
-        console.log('slot was clicked')
-    })
-});
 
 function win_check() {
     //iterates through the Win_Array and checks for win conditions
@@ -287,37 +279,8 @@ function Build_Win_Array(width) {
     Win_Array.push(Win_Condition);
     console.log("Win Array", Win_Array);
     Win_Condition = [];
-}
-
-var container = $('<div>', {
-    class: 'container',
-});
-var smWaffleGrid = $('<div>', {
-    class: 'smWaffleGrid',
-});
-var row = $('<div>', {
-    class: 'row',
-});
-var cell = $('<div>', {
-    class: 'slot',
-    id: 'slot' + num,
-    onclick: 'XO(' + num + ')',
-});
-var num = 0;
-
-function smGenerator() {
-    for (k = 0; k < 1; k++) {
-        $('#gameboard').append(smWaffleGrid);
-        for (j = 0; j < 3; j++) {
-            $('.smWaffleGrid').append(row);
-            for (i = 0; i < 3; i++) {
-                num = num++;
-                $('.row').append(cell);
-                console.log('num: ' + num + " i: " + i);
-            }
-            console.log('j' + j);
-        }
-        console.log('k:' + k);
-    }
 
 }
+
+
+
