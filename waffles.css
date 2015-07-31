@@ -1,4 +1,4 @@
-.banner{
+.banner {
     height: 250px;
     width: 100%;
     background-color: #4281A4;
@@ -8,14 +8,16 @@
 
 .smWaffleGrid {
     display: inline-block;
-    margin:0 auto;
+    margin: 0 auto;
     padding: 20px;
     background-color: #EAD2AC;
 }
+
 .container {
     width: 475px;
-	margin: 100px auto;  
+    margin: 100px auto;
 }
+
 .slot {
     width: 125px;
     height: 125px;
@@ -25,18 +27,19 @@
     font-size: 100px;
     text-align: center;
     line-height: 125px;
+    vertical-align: top;
 }
 
 #gameboard {
-	margin:0 auto;
+    margin: 0 auto;
     width: 100%;
 }
 
-body{
+body {
     background-color: #9DA9A0;
 }
 
-.footer { 
+.footer {
     height: 100px;
     width: 100%;
     background-color: #B26E63;
@@ -44,7 +47,7 @@ body{
     padding: 0;
 }
 
-.tile_img{
+.tile_img {
     width: 125px;
     height: 125px;
 }
