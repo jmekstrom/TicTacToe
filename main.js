@@ -3,31 +3,34 @@ var player_clicks = [1,2,3,4,5,6,7,8,9];
 var Win_Array = [];
 var board_width;
 var click_num = 0;
-var size = 3;
+var container;
 
-function smWaffle() {
-    //Create container for actual game
-    var container = $("<div>", {
+function smWaffle(size) {
+    container = $("<div>", {
         class: "container"
-    });
+    })
     $("#gameboard").append(container);
-    for(var j = 0; j < size; j++) {
+    var k = 0;
+    for(var i = 0; i < size*size; i+=size) {
         //create row object
         var row = $("<div>",{
-            class: "row"+j
-        });
+            class: "row"+ k,
+        })
+
         $(".container").append(row);
-        for (var i = 0; i < size; i++) {
-            //creating unique slots for game board with their own IDs and onclick functions
+        for (var j = i; j < size + i; j++) {
             var slot = $("<div>", {
                 class: "slot",
-                id: "slot" + (j*size)+i,
-                onclick: "XO(" + ((j*size)+i) + ")"
-            });
-            $(".row" + j).append(slot);
+                id: "slot" + (j+1),
+                onclick: "XO(" + (j+1) + ")"
+            })
+           $(".row" + k).append(slot);
         }
+        k++;
     }
+
 }
+
 
 function XO(n) {
     click_num++;
