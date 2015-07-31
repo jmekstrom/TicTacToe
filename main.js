@@ -3,188 +3,34 @@ var player_clicks = [1,2,3,4,5,6,7,8,9];
 var Win_Array = [];
 var board_width;
 var click_num = 0;
+var container;
 
 function smWaffle(size) {
-    var container = $("<div>", {
-        class: container
+    container = $("<div>", {
+        class: "container"
     })
     $("#gameboard").append(container);
-    for(var j = 1; j <= size; j++) {
+    var k = 0;
+    for(var i = 0; i < size*size; i+=size) {
         //create row object
         var row = $("<div>",{
-            class: "row"+j,
+            class: "row"+ k,
         })
+
         $(".container").append(row);
-        for (var i = 1; i < size + i; i++) {
+        for (var j = i; j < size + i; j++) {
             var slot = $("<div>", {
                 class: "slot",
-                id: "slot" + i,
-                onclick: "XO(" + i + ")"
+                id: "slot" + (j+1),
+                onclick: "XO(" + (j+1) + ")"
             })
-            $(".row" + j).append(slot);
+           $(".row" + k).append(slot);
         }
+        k++;
     }
+
 }
 
-function mdWaffle() {
-    $('#gameboard').html(
-        '<div class="container">' +
-        '<div class="smWaffleGrid">' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(1)></div>' +
-        '<div class="slot" onclick=XO(2)></div>' +
-        '<div class="slot" onclick=XO(3)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(4)></div>' +
-        '<div class="slot" onclick=XO(5)></div>' +
-        '<div class="slot" onclick=XO(6)></div>' +
-        '<div>' +
-        '</div class="row">' +
-        '<div class="slot" onclick=XO(7)></div>' +
-        '<div class="slot" onclick=XO(8)></div>' +
-        '<div class="slot" onclick=XO(9)></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="container">' +
-        '<div class="smWaffleGrid">' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(1)></div>' +
-        '<div class="slot" onclick=XO(2)></div>' +
-        '<div class="slot" onclick=XO(3)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(4)></div>' +
-        '<div class="slot" onclick=XO(5)></div>' +
-        '<div class="slot" onclick=XO(6)></div>' +
-        '<div>' +
-        '</div class="row">' +
-        '<div class="slot" onclick=XO(7)></div>' +
-        '<div class="slot" onclick=XO(8)></div>' +
-        '<div class="slot" onclick=XO(9)></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="container">' +
-        '<div class="smWaffleGrid">' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(1)></div>' +
-        '<div class="slot" onclick=XO(2)></div>' +
-        '<div class="slot" onclick=XO(3)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(4)></div>' +
-        '<div class="slot" onclick=XO(5)></div>' +
-        '<div class="slot" onclick=XO(6)></div>' +
-        '<div>' +
-        '</div class="row">' +
-        '<div class="slot" onclick=XO(7)></div>' +
-        '<div class="slot" onclick=XO(8)></div>' +
-        '<div class="slot" onclick=XO(9)></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>');
-}
-
-function lgWaffle() {
-    $('#gameboard').html(
-        '<div class="container">' +
-        '<div class="smWaffleGrid">' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(1)></div>' +
-        '<div class="slot" onclick=XO(2)></div>' +
-        '<div class="slot" onclick=XO(3)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(4)></div>' +
-        '<div class="slot" onclick=XO(5)></div>' +
-        '<div class="slot" onclick=XO(6)></div>' +
-        '<div>' +
-        '</div class="row">' +
-        '<div class="slot" onclick=XO(7)></div>' +
-        '<div class="slot" onclick=XO(8)></div>' +
-        '<div class="slot" onclick=XO(9)></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="container">' +
-        '<div class="smWaffleGrid">' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(1)></div>' +
-        '<div class="slot" onclick=XO(2)></div>' +
-        '<div class="slot" onclick=XO(3)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(4)></div>' +
-        '<div class="slot" onclick=XO(5)></div>' +
-        '<div class="slot" onclick=XO(6)></div>' +
-        '<div>' +
-        '</div class="row">' +
-        '<div class="slot" onclick=XO(7)></div>' +
-        '<div class="slot" onclick=XO(8)></div>' +
-        '<div class="slot" onclick=XO(9)></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="container">' +
-        '<div class="smWaffleGrid">' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(1)></div>' +
-        '<div class="slot" onclick=XO(2)></div>' +
-        '<div class="slot" onclick=XO(3)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(4)></div>' +
-        '<div class="slot" onclick=XO(5)></div>' +
-        '<div class="slot" onclick=XO(6)></div>' +
-        '<div>' +
-        '</div class="row">' +
-        '<div class="slot" onclick=XO(7)></div>' +
-        '<div class="slot" onclick=XO(8)></div>' +
-        '<div class="slot" onclick=XO(9)></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="container">' +
-        '<div class="smWaffleGrid">' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(1)></div>' +
-        '<div class="slot" onclick=XO(2)></div>' +
-        '<div class="slot" onclick=XO(3)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(4)></div>' +
-        '<div class="slot" onclick=XO(5)></div>' +
-        '<div class="slot" onclick=XO(6)></div>' +
-        '<div>' +
-        '</div class="row">' +
-        '<div class="slot" onclick=XO(7)></div>' +
-        '<div class="slot" onclick=XO(8)></div>' +
-        '<div class="slot" onclick=XO(9)></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="container">' +
-        '<div class="smWaffleGrid">' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(1)></div>' +
-        '<div class="slot" onclick=XO(2)></div>' +
-        '<div class="slot" onclick=XO(3)></div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="slot" onclick=XO(4)></div>' +
-        '<div class="slot" onclick=XO(5)></div>' +
-        '<div class="slot" onclick=XO(6)></div>' +
-        '<div>' +
-        '</div class="row">' +
-        '<div class="slot" onclick=XO(7)></div>' +
-        '<div class="slot" onclick=XO(8)></div>' +
-        '<div class="slot" onclick=XO(9)></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>');
-}
 
 function XO(n) {
     click_num++;
