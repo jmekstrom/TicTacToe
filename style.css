@@ -4,6 +4,7 @@
 }
 
 .title{
+    margin-top: 0;
     font-size: 100px;
 }
 
@@ -12,7 +13,7 @@
     width: 150px;
     height: 150px;
     margin: 0px;
-    line-height: 150px;
+    line-height: 165px;
     display: inline-block;
     font-size: 150px;
     text-align: center;
@@ -29,7 +30,7 @@ body {
 
 
 table{
-    margin: 75px auto;
+    margin: 5% auto;
     padding: 0;
     border-collapse: collapse;
 }
