@@ -1,30 +1,42 @@
 var player = 1;
-var player_clicks = [1,2,3,4,5,6,7,8,9];
+var player_clicks = [];
 var Win_Array = [];
 var board_width;
 var click_num = 0;
 var container;
+var player1_wins = 0;
+var player2_wins = 0;
+var tie = 0;
+var game_size = 3;
 
-function smWaffle(size) {
-    container = $("<div>", {
-        class: "container"
-    })
-    $("#gameboard").append(container);
+$(document).ready(function() {
+    build_gameboard(game_size);
+    Build_Win_Array(game_size);
+    $(".player1").addClass("active_player");
+    $(".3by").addClass("active_size");
+    $("#player1_score").html(player1_wins);
+    $("#player2_score").html(player2_wins);
+    $("#tie_score").html(tie);
+})
+
+function build_gameboard(size) {
+    $("#gameboard").empty();
+    click_num = 0;
     var k = 0;
-    for(var i = 0; i < size*size; i+=size) {
+    for (var i = 0; i < size * size; i += size) {
         //create row object
-        var row = $("<div>",{
-            class: "row"+ k,
+        var row = $("<tr>", {
+            class: "row" + k,
         })
 
-        $(".container").append(row);
+        $("#gameboard").append(row);
         for (var j = i; j < size + i; j++) {
-            var slot = $("<div>", {
+            var slot = $("<td>", {
                 class: "slot",
-                id: "slot" + (j+1),
-                onclick: "XO(" + (j+1) + ")"
+                id: "slot" + (j + 1),
+                onclick: "XO(" + (j + 1) + ")"
             })
-           $(".row" + k).append(slot);
+            $(".row" + k).append(slot);
         }
         k++;
     }
@@ -37,22 +49,45 @@ function XO(n) {
     console.log("Slot:", n, "has been clicked");
     $("#slot" + n).removeAttr('onclick');
     if (player == 1) {
-        player_clicks[n-1] = "x";
+        player_clicks[n - 1] = "x";
         player = 2;
-        $("#slot" + n).append("<img class='tile_img' src='images/blueberry.png'>");
+        $("#slot" + n).text("X");
+        $(".player1").removeClass("active_player");
+        $(".player2").addClass("active_player");
     } else {
-        player_clicks[n-1] = "o";
+        player_clicks[n - 1] = "o";
         player = 1;
-        $("#slot" + n).append("<img class='tile_img' src='images/raspberry.png'>");
+        $("#slot" + n).text("O");
+        $(".player2").removeClass("active_player");
+        $(".player1").addClass("active_player");
     }
     console.log(player_clicks)
     var won = win_check();
-    if(won != undefined){
-        console.log("Game Won by",won)
+    console.log(won, "won");
+    if (won == "x") {
+        console.log("Game Won by", won)
+        player1_wins++;
+        $("#player1_score").html(player1_wins);
+        reset_game();
+    } else if (won == "o") {
+        player2_wins++;
+        $("#player2_score").html(player2_wins);
+        reset_game();
     }
-    if(click_num==9 && won == undefined){
+    if (click_num == player_clicks.length && won == undefined) {
         console.log("Tie Game")
+        tie++;
+        $("#tie_score").html(tie);
+        reset_game();
     }
+}
+
+function reset_game() {
+    $("table").effect("shake", 500);
+    setTimeout(function() {
+        build_gameboard(game_size);
+        Build_Win_Array(game_size);
+    }, 500);
 }
 
 function win_check() {
@@ -62,7 +97,7 @@ function win_check() {
     for (var i = 0; i < Win_Array.length; i++) {
         //Inner for loop interates through the win condition array (nested in the win array) 
         //and points to the player click array and looks for the amount of matches equal to 
-        //board width -1
+        //game_size -1
         var match = 0;
         var previous_value = null;
         for (var j = 0; j < Win_Array[i].length; j++) {
@@ -70,8 +105,8 @@ function win_check() {
             //console.log("cv:",current_value,", pv:",previous_value)
             if (current_value == previous_value) {
                 match++;
-                console.log("match:",match)
-                if (match == board_width - 1) {
+                console.log("match:", match)
+                if (match == game_size - 1) {
                     return current_value
                 }
             }
@@ -81,12 +116,14 @@ function win_check() {
 }
 
 function Build_Win_Array(width) {
-
+    player_clicks = [];
+    for (var i = 0; i < width * width; i++) {
+        player_clicks.push(i + 1);
+    }
     var size = width;
-    board_width = size;
     var Win_Condition = [];
 
-    //horizontal conditions
+    //horizontal win conditions
     for (var i = 0; i < size * size; i += size) {
         for (var j = i; j < size + i; j++) {
             Win_Condition.push(j);
@@ -97,7 +134,7 @@ function Build_Win_Array(width) {
     }
     //console.log("WA", WA);
 
-    //vertical conditions
+    //vertical win conditions
     for (var i = 0; i < size; i++) {
         for (var j = i; j < size * size; j += size) {
             Win_Condition.push(j);
@@ -108,7 +145,7 @@ function Build_Win_Array(width) {
     }
     //console.log("WA", WA);
 
-    //diagonal tl to br
+    //diagonal top-left to bottom-right win conditions
     for (var i = 0; i < size * size; i += size + 1) {
         Win_Condition.push(i);
     }
@@ -117,7 +154,7 @@ function Build_Win_Array(width) {
     //console.log("WA", WA);
     Win_Condition = [];
 
-    //diagonal tr to bl
+    //diagonal top-right to bottom-left win conditions
     for (var i = size - 1; i <= size * size - size; i += size - 1) {
         Win_Condition.push(i);
     }
@@ -128,5 +165,10 @@ function Build_Win_Array(width) {
 
 }
 
-
-
+function update_board_size(size) {
+    game_size = size;
+    build_gameboard(game_size);
+    Build_Win_Array(game_size);
+    $(".boardsize").removeClass("active_size");
+    $("."+size+"by").addClass("active_size");
+}
