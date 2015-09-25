@@ -23,4 +23,4 @@ this game completely dynamic (game board and win conditions created based on inp
    ![Alt text](/screenshots/pic3.png)
  
 <h2>Link to Live Preview:</h2>
-<a href="http://jmekstrom.github.io/Calculator" target="_blank">Click here to see a live preview</a>
+<a href="http://jmekstrom.github.io/TicTacToe" target="_blank">Click here to see a live preview</a>
