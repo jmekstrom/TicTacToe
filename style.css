@@ -1,6 +1,6 @@
 @font-face {
-    font-family: candyFont;
-    src: url(fonts/CANDY.otf);
+    font-family: Existence-Light;
+    src: url(fonts/Existence-Light/Existence-Light.otf);
 }
 
 .title{
@@ -24,6 +24,7 @@ body {
     background-color: black;
     color: white;
     padding: 25px;
+    font-family: Existence-Light;
 }
 
 
